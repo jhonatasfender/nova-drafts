@@ -74,7 +74,6 @@ class DraftButton extends Field
         $draft_model = new Draft();
         if (isset($request->draft) && $draft_model->draftsEnabled()) {
             Draft::createDraft($model);
-            $model->refresh();
             $model->save();
             return true;
         }

@@ -13,9 +13,10 @@
 <script>
 import { InteractsWithResourceInformation, Deletable } from 'laravel-nova';
 import FindsNovaElements from '../../mixins/FindsNovaElements';
+import UnpublishesModels from '../../mixins/UnpublishesModels';
 
 export default {
-  mixins: [Deletable, InteractsWithResourceInformation, FindsNovaElements],
+  mixins: [Deletable, InteractsWithResourceInformation, FindsNovaElements, UnpublishesModels],
 
   props: ['resource', 'resourceId', 'field', 'resourceName'],
 
@@ -44,6 +45,7 @@ export default {
 
   methods: {
     discard() {
+      this.unpublish()
       this.forceDeleteResources([this.resource], () => {
         this.$toasted.show(this.__('novaDrafts.dicardSuccessToast'), { type: 'success' });
         this.$router.push({ name: 'index', params: { resourceName: this.resourceName } });

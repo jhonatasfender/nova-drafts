@@ -25,7 +25,6 @@ class Draft extends Model
             $newResource->draft_parent_id = $data->id;
             $newResource->preview_token = Str::random(20);
             $newResource->save();
-            return false;
         }
 
         $data->published = false;
@@ -36,14 +35,20 @@ class Draft extends Model
     public static function childDraft($class, $id)
     {
         $child = $class::where('draft_parent_id', $id)->get()->first();
-        if ($child === null) return null;
+        if ($child === null) {
+            return null;
+        }
+
         return $child->toArray();
     }
 
     public static function draftParent($class, $id)
     {
         $parent = $class::where('id', $id)->get()->first();
-        if ($parent === null) return null;
+        if ($parent === null) {
+            return null;
+        }
+
         return $parent;
     }
 

@@ -41,7 +41,7 @@ class DraftController extends Controller
     public function unpublishDraft($draftId, Request $request)
     {
         $draftClass = $request->input('class');
-        $draftToUnpublish = $draftClass::find($draftId);
+        $draftToUnpublish = $draftClass::find(intval($draftId));
 
         if (empty($draftToUnpublish)) return response()->json(['error' => 'model_not_found'], 404);
 

@@ -2,11 +2,11 @@
 
 namespace OptimistDigital\NovaDrafts;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Events\ServingNova;
+use Laravel\Nova\Nova;
 use OptimistDigital\NovaDrafts\Commands\CreateDraftsMigration;
 
 class FieldServiceProvider extends ServiceProvider
@@ -33,7 +33,9 @@ class FieldServiceProvider extends ServiceProvider
 
     protected function routes()
     {
-        if ($this->app->routesAreCached()) return;
+        if ($this->app->routesAreCached()) {
+            return;
+        }
 
         Route::middleware(['api'])
             ->prefix('nova-vendor/nova-drafts')
@@ -48,10 +50,22 @@ class FieldServiceProvider extends ServiceProvider
             $locale = app()->getLocale();
             $fallbackLocale = config('app.fallback_locale');
 
-            if ($this->attemptToLoadTranslations($locale, 'project')) return;
-            if ($this->attemptToLoadTranslations($locale, 'local')) return;
-            if ($this->attemptToLoadTranslations($fallbackLocale, 'project')) return;
-            if ($this->attemptToLoadTranslations($fallbackLocale, 'local')) return;
+            if ($this->attemptToLoadTranslations($locale, 'project')) {
+                return;
+            }
+
+            if ($this->attemptToLoadTranslations($locale, 'local')) {
+                return;
+            }
+
+            if ($this->attemptToLoadTranslations($fallbackLocale, 'project')) {
+                return;
+            }
+
+            if ($this->attemptToLoadTranslations($fallbackLocale, 'local')) {
+                return;
+            }
+
             $this->attemptToLoadTranslations('en', 'local');
         }
     }
@@ -59,8 +73,8 @@ class FieldServiceProvider extends ServiceProvider
     protected function attemptToLoadTranslations($locale, $from)
     {
         $filePath = $from === 'local'
-            ? __DIR__ . '/../resources/lang/' . $locale . '.json'
-            : resource_path('lang/vendor/nova-drafts') . '/' . $locale . '.json';
+        ? __DIR__ . '/../resources/lang/' . $locale . '.json'
+        : resource_path('lang/vendor/nova-drafts') . '/' . $locale . '.json';
 
         $localeFileExists = File::exists($filePath);
         if ($localeFileExists) {

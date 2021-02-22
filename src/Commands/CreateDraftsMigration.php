@@ -82,7 +82,7 @@ class CreateDraftsMigration extends Command
         $class_name = "AddNovaDraftsTo{$class_name}";
 
         if (Schema::hasColumn($this->tableName, 'draft_parent_id')) {
-            throw new \Exception("Table '{$this->tableName}' already has drafts, do you wish to continue?");
+            throw new \Exception("Table '{$this->tableName}' already has drafts");
         }
 
         return $class_name;
