@@ -154,7 +154,6 @@ __webpack_require__.r(__webpack_exports__);
     discard: function discard() {
       var _this = this;
 
-      this.unpublish();
       this.forceDeleteResources([this.resource], function () {
         _this.$toasted.show(_this.__('novaDrafts.dicardSuccessToast'), {
           type: 'success'
@@ -28790,13 +28789,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                debugger;
-                _context.next = 4;
+                _context.next = 3;
                 return Nova.request().post("/nova-vendor/nova-drafts/draft-unpublish/".concat(_this.resourceId), {
                   "class": _this.field["class"]
                 });
 
-              case 4:
+              case 3:
                 // Reload page
                 _this.$router.go(null);
 
@@ -28804,11 +28802,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   type: 'success'
                 });
 
-                _context.next = 13;
+                _context.next = 12;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
@@ -28818,12 +28816,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context.abrupt("return");
 
-              case 13:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 7]]);
       }))();
     }
   }

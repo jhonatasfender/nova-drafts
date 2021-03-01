@@ -45,7 +45,6 @@ export default {
 
   methods: {
     discard() {
-      this.unpublish()
       this.forceDeleteResources([this.resource], () => {
         this.$toasted.show(this.__('novaDrafts.dicardSuccessToast'), { type: 'success' });
         this.$router.push({ name: 'index', params: { resourceName: this.resourceName } });
